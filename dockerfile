@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM golang:1.20-alpine3.18
+FROM public.ecr.aws/docker/library/golang:1.20-alpine3.18
 
 # Set default destination for all the subsequent commands
 WORKDIR /app

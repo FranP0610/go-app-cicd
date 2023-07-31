@@ -1,0 +1,81 @@
+{
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:917972781642:task-definition/fran-0000-devops-prod-00-ecs-task-app:2",
+    "containerDefinitions": [
+        {
+            "name": "fran-0000-devops-prod-00-ecs-task-app",
+            "image": "917972781642.dkr.ecr.us-east-1.amazonaws.com/fran-0000-devops-prod-00-ecr-repo-app:e39acb5c31f7429d15d0e29982813807df87ed39",
+            "cpu": 256,
+            "memory": 512,
+            "portMappings": [
+                {
+                    "containerPort": 8080,
+                    "hostPort": 8080,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "linuxParameters": {
+                "initProcessEnabled": true
+            },
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "fran-0000-devops-prod-00-cw-log-app",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "prod-app"
+                }
+            }
+        }
+    ],
+    "family": "fran-0000-devops-prod-00-ecs-task-app",
+    "taskRoleArn": "arn:aws:iam::917972781642:role/fran-0000-devops-prod-00-iam-role-task-app",
+    "executionRoleArn": "arn:aws:iam::917972781642:role/fran-0000-devops-prod-00-iam-role-exec-app",
+    "networkMode": "awsvpc",
+    "revision": 2,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.25"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "256",
+    "memory": "512",
+    "registeredAt": "2023-07-25T18:22:38.737000-05:00",
+    "registeredBy": "arn:aws:sts::917972781642:assumed-role/fran-0000-devops-test-iam-role-github/GitHub_to_AWS_via_FederatedOIDC"
+}
