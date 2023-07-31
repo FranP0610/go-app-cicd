@@ -40,6 +40,9 @@ Thumbs.db
 *.exe
 *.war
 
+#Jetbrains
+.idea
+
 # Large media files
 *.mp4
 *.tiff
