@@ -14,8 +14,8 @@ env:
   IAM_ROLE: "arn:aws:iam::917972781642:role/fran-0000-devops-test-iam-role-github"
   ECR_REPOSITORY: "fran-0000-devops-prod-00-ecr-repo-app"   # set this to your Amazon ECR repository name
   ECS_TASK_DEFINITION: "./aws/task-definition.json"
-  CONTAINER_NAME: "fran-0000-devops-prod-00-ecs-task-app"
-  ECS_SERVICE: "fran-0000-devops-prod-00-ecs-service-app"
+  CONTAINER_NAME: "fran-0000-devops-prod-01-ecs-task-golang"
+  ECS_SERVICE: "fran-0000-devops-prod-01-ecs-service-golang"
   ECS_CLUSTER: "fran-0000-devops-prod-00-ecs-cluster-app"
 
 # Permission can be added at job level or workflow level
