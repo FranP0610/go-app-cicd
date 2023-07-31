@@ -15,12 +15,12 @@ type Data struct {
 
 func getIndexHtml(responseWriter http.ResponseWriter, request *http.Request) {
 	template, err := template.ParseFiles("templates/index.html")
-	user := Data{"10.10.0.0/32"}
+	localIp := Data{"10.10.0.0/32"}
 	//fmt.Println(user)
 	if err != nil {
 		panic(err)
 	} else {
-		template.Execute(responseWriter, user)
+		template.Execute(responseWriter, localIp)
 	}
 
 }
