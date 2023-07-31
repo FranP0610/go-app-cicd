@@ -1,11 +1,12 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-1:917972781642:task-definition/fran-0000-devops-prod-00-ecs-task-app:3",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:917972781642:task-definition/fran-0000-devops-prod-01-ecs-task-golang:1",
     "containerDefinitions": [
         {
-            "name": "fran-0000-devops-prod-00-ecs-task-app",
-            "image": "917972781642.dkr.ecr.us-east-1.amazonaws.com/fran-0000-devops-prod-00-ecr-repo-app:08264ce4519b137758441201d8affd361298123c",
+            "name": "fran-0000-devops-prod-01-ecs-task-golang",
+            "image": "917972781642.dkr.ecr.us-east-1.amazonaws.com/fran-0000-devops-prod-00-ecr-repo-app:94f9f7eca23fc0dadb52af4c5949f37c0b59a6a5",
             "cpu": 256,
             "memory": 512,
+            "links": [],
             "portMappings": [
                 {
                     "containerPort": 8000,
@@ -14,27 +15,41 @@
                 }
             ],
             "essential": true,
+            "entryPoint": [],
+            "command": [],
             "environment": [],
+            "environmentFiles": [],
             "mountPoints": [],
             "volumesFrom": [],
             "linuxParameters": {
-                "initProcessEnabled": true
+                "devices": [],
+                "initProcessEnabled": true,
+                "tmpfs": []
             },
+            "secrets": [],
+            "dnsServers": [],
+            "dnsSearchDomains": [],
+            "extraHosts": [],
+            "dockerSecurityOptions": [],
+            "dockerLabels": {},
+            "ulimits": [],
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                    "awslogs-group": "fran-0000-devops-prod-00-cw-log-app",
+                    "awslogs-group": "fran-0000-devops-prod-01-cw-log-golang",
                     "awslogs-region": "us-east-1",
-                    "awslogs-stream-prefix": "prod-app"
-                }
-            }
+                    "awslogs-stream-prefix": "prod-golang"
+                },
+                "secretOptions": []
+            },
+            "systemControls": []
         }
     ],
-    "family": "fran-0000-devops-prod-00-ecs-task-app",
-    "taskRoleArn": "arn:aws:iam::917972781642:role/fran-0000-devops-prod-00-iam-role-task-app",
-    "executionRoleArn": "arn:aws:iam::917972781642:role/fran-0000-devops-prod-00-iam-role-exec-app",
+    "family": "fran-0000-devops-prod-01-ecs-task-golang",
+    "taskRoleArn": "arn:aws:iam::917972781642:role/fran-0000-devops-prod-01-iam-role-task-golang",
+    "executionRoleArn": "arn:aws:iam::917972781642:role/fran-0000-devops-prod-01-iam-role-exec-golang",
     "networkMode": "awsvpc",
-    "revision": 3,
+    "revision": 1,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -51,10 +66,16 @@
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
         },
         {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.17"
+        },
+        {
             "name": "com.amazonaws.ecs.capability.task-iam-role"
         },
         {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.25"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.22"
         },
         {
             "name": "ecs.capability.execution-role-ecr-pull"
@@ -76,6 +97,6 @@
     ],
     "cpu": "256",
     "memory": "512",
-    "registeredAt": "2023-07-31T13:51:02.973000-05:00",
-    "registeredBy": "arn:aws:sts::917972781642:assumed-role/fran-0000-devops-test-iam-role-github/GitHub_to_AWS_via_FederatedOIDC"
+    "registeredAt": "2023-07-31T18:09:00.244000-05:00",
+    "registeredBy": "arn:aws:sts::917972781642:assumed-role/DEVOPS-0000-BASE-ALL-ROLE-00-ADMINISTRATOR/fperez"
 }

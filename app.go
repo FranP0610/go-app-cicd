@@ -12,7 +12,7 @@ type Data struct {
 	LocalIp string
 }
 
-func getEcsMetadat() () {
+func getEcsMetadat() {
 	// Fetch ECS Task metadata from environment
 	meta, err := metadata.Get(context.Background(), &http.Client{})
 	if err != nil {
