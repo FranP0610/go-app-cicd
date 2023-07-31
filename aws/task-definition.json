@@ -1,15 +1,15 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-1:917972781642:task-definition/fran-0000-devops-prod-00-ecs-task-app:2",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:917972781642:task-definition/fran-0000-devops-prod-00-ecs-task-app:3",
     "containerDefinitions": [
         {
             "name": "fran-0000-devops-prod-00-ecs-task-app",
-            "image": "917972781642.dkr.ecr.us-east-1.amazonaws.com/fran-0000-devops-prod-00-ecr-repo-app:e39acb5c31f7429d15d0e29982813807df87ed39",
+            "image": "917972781642.dkr.ecr.us-east-1.amazonaws.com/fran-0000-devops-prod-00-ecr-repo-app:08264ce4519b137758441201d8affd361298123c",
             "cpu": 256,
             "memory": 512,
             "portMappings": [
                 {
-                    "containerPort": 8080,
-                    "hostPort": 8080,
+                    "containerPort": 8000,
+                    "hostPort": 8000,
                     "protocol": "tcp"
                 }
             ],
@@ -34,7 +34,7 @@
     "taskRoleArn": "arn:aws:iam::917972781642:role/fran-0000-devops-prod-00-iam-role-task-app",
     "executionRoleArn": "arn:aws:iam::917972781642:role/fran-0000-devops-prod-00-iam-role-exec-app",
     "networkMode": "awsvpc",
-    "revision": 2,
+    "revision": 3,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -76,6 +76,6 @@
     ],
     "cpu": "256",
     "memory": "512",
-    "registeredAt": "2023-07-25T18:22:38.737000-05:00",
+    "registeredAt": "2023-07-31T13:51:02.973000-05:00",
     "registeredBy": "arn:aws:sts::917972781642:assumed-role/fran-0000-devops-test-iam-role-github/GitHub_to_AWS_via_FederatedOIDC"
 }
