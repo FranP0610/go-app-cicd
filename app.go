@@ -25,8 +25,8 @@ func getIndexHtml(responseWriter http.ResponseWriter, request *http.Request) {
 
 }
 func main() {
-	http.HandleFunc("/", getIndexHtml)
+	http.HandleFunc("/app", getIndexHtml)
 	// Initialize web server on port 8080 without error handler
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8000", nil)
 
 }

@@ -3,8 +3,8 @@ name: 'Deploy To Ecr'
 on:
   push:
     branches: [ 'development' ]
-    paths:
-      - '**docker-cicd.yml'
+#    paths:
+#      - '**docker-cicd.yml'
 
 env:
   BUCKET_NAME: "fran-prueba-template"
