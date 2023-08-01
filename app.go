@@ -1,10 +1,8 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"html/template"
-	"io"
 	//"io/ioutil"
 	"net/http"
 )
@@ -24,34 +22,33 @@ type Data struct {
 	localIp string
 }
 
-func getEcsMetadata() string {
-	response, err := http.Get("http://169.254.170.2/v2/metadata")
-	if err != nil {
-		panic(err)
-	}
-	defer response.Body.Close()
-	body, err := io.ReadAll(response.Body)
-
-	if err != nil {
-		//fmt.Fprintf(os.Stderr, "Error getting ECS Task Metada: %v\n", err)
-		//os.Exit(1)
-		panic(err)
-	}
-	var metadata taskMetadata
-	if err = json.Unmarshal(body, &metadata); err != nil {
-		panic(err)
-	}
-
-	if len(metadata.Containers) > 0 && len(metadata.Containers[0].Networks) > 0 && len(metadata.Containers[0].Networks[0].ipv4Address) > 0 {
-		return metadata.Containers[0].Networks[0].ipv4Address[0]
-	} else {
-		return "NoValue"
-	}
-}
+//func getEcsMetadata() string {
+//	response, err := http.Get("http://169.254.170.2/v2/metadata")
+//	if err != nil {
+//		panic(err)
+//	}
+//	defer response.Body.Close()
+//	body, err := io.ReadAll(response.Body)
+//
+//	if err != nil {
+//		panic(err)
+//	}
+//	var metadata taskMetadata
+//	if err = json.Unmarshal(body, &metadata); err != nil {
+//		panic(err)
+//	}
+//
+//	if len(metadata.Containers) > 0 && len(metadata.Containers[0].Networks) > 0 && len(metadata.Containers[0].Networks[0].ipv4Address) > 0 {
+//		return metadata.Containers[0].Networks[0].ipv4Address[0]
+//	} else {
+//		return "NoValue"
+//	}
+//}
 
 func getIndexHtml(responseWriter http.ResponseWriter, request *http.Request) {
 	template, err := template.ParseFiles("templates/index.html")
-	LocalIp := Data{getEcsMetadata()}
+	//LocalIp := Data{getEcsMetadata()}
+	LocalIp := Data{"10.10.0.0/22"}
 	fmt.Println(LocalIp)
 
 	if err != nil {
