@@ -1,41 +1,64 @@
 package main
 
 import (
-	"context"
-	metadata "github.com/brunoscheufler/aws-ecs-metadata-go"
+	"encoding/json"
 	"html/template"
-	"log"
+	"io"
+	//"io/ioutil"
 	"net/http"
 )
 
-type Data struct {
-	LocalIp string
+type taskMetadata struct {
+	Containers []Container
+}
+type Container struct {
+	Networks []Network
 }
 
-func getEcsMetadat() {
-	// Fetch ECS Task metadata from environment
-	meta, err := metadata.Get(context.Background(), &http.Client{})
+type Network struct {
+	ipv4Address []string
+}
+
+//type Data struct {
+//	localIp string
+//}
+
+func getEcsMetadata() string {
+	response, err := http.Get("http://169.254.170.2/v2/metadata")
 	if err != nil {
 		panic(err)
 	}
-	// Based on the Fargate platform version, we'll have access
-	// to v3 or v4 of the ECS Metadata format
-	switch m := meta.(type) {
-	case *metadata.TaskMetadataV3:
-		log.Printf("%s %s:%s", m.Cluster, m.Family, m.Revision)
-	case *metadata.TaskMetadataV4:
-		log.Printf("%s(%s) %s:%s", m.Cluster, m.AvailabilityZone, m.Family, m.Revision)
+	defer response.Body.Close()
+	body, err := io.ReadAll(response.Body)
+
+	if err != nil {
+		//fmt.Fprintf(os.Stderr, "Error getting ECS Task Metada: %v\n", err)
+		//os.Exit(1)
+		panic(err)
+	}
+	var metadata taskMetadata
+	if err = json.Unmarshal(body, &metadata); err != nil {
+		panic(err)
+	}
+
+	if len(metadata.Containers) > 0 && len(metadata.Containers[0].Networks) > 0 && len(metadata.Containers[0].Networks[0].ipv4Address) > 0 {
+		return metadata.Containers[0].Networks[0].ipv4Address[0]
+	} else {
+		return "NoValue"
 	}
 }
 
 func getIndexHtml(responseWriter http.ResponseWriter, request *http.Request) {
 	template, err := template.ParseFiles("templates/index.html")
-	localIp := Data{"10.10.0.0/32"}
+	ipAddress := getEcsMetadata()
+	//if ipAddress == "NoValue" {
+	//	ipA = ipAddress
+	//}
 	//fmt.Println(user)
 	if err != nil {
 		panic(err)
 	} else {
-		template.Execute(responseWriter, localIp)
+		template.Execute(responseWriter, ipAddress)
 	}
 
 }
@@ -43,7 +66,5 @@ func main() {
 	http.HandleFunc("/app", getIndexHtml)
 	// Initialize web server on port 8080 without error handler
 	http.ListenAndServe(":8000", nil)
-	//call get metadata
-	getEcsMetadat()
 
 }
