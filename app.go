@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"html/template"
 	"io"
 	//"io/ioutil"
@@ -51,10 +52,8 @@ func getEcsMetadata() string {
 func getIndexHtml(responseWriter http.ResponseWriter, request *http.Request) {
 	template, err := template.ParseFiles("templates/index.html")
 	LocalIp := getEcsMetadata()
-	//if ipAddress == "NoValue" {
-	//	ipA = ipAddress
-	//}
-	//fmt.Println(user)
+	fmt.Printf(LocalIp)
+
 	if err != nil {
 		panic(err)
 	} else {
