@@ -50,7 +50,7 @@ func getEcsMetadata() string {
 
 func getIndexHtml(responseWriter http.ResponseWriter, request *http.Request) {
 	template, err := template.ParseFiles("templates/index.html")
-	IpAddress := getEcsMetadata()
+	LocalIp := getEcsMetadata()
 	//if ipAddress == "NoValue" {
 	//	ipA = ipAddress
 	//}
@@ -58,7 +58,7 @@ func getIndexHtml(responseWriter http.ResponseWriter, request *http.Request) {
 	if err != nil {
 		panic(err)
 	} else {
-		template.Execute(responseWriter, IpAddress)
+		template.Execute(responseWriter, LocalIp)
 	}
 
 }
