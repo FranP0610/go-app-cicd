@@ -40,12 +40,15 @@ func getEcsMetadata() string {
 	if err = json.Unmarshal(body, &metadata); err != nil {
 		panic(err)
 	}
+	//print the value
+	log.Println(metadata.Containers[0].Networks[0].ipv4Address[0])
 
 	if len(metadata.Containers) > 0 && len(metadata.Containers[0].Networks) > 0 && len(metadata.Containers[0].Networks[0].ipv4Address) > 0 {
 		return metadata.Containers[0].Networks[0].ipv4Address[0]
 	} else {
 		return "NoValue"
 	}
+
 }
 
 func getIndexHtml(responseWriter http.ResponseWriter, request *http.Request) {
