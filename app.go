@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"html/template"
 	"io"
 	"log"
@@ -25,8 +24,9 @@ type Data struct {
 	LocalIp string
 }
 
-func getEcsMetadata() string {
+func getEcsMetadata() {
 	response, err := http.Get("http://169.254.170.2/v2/metadata")
+	//response, err := http.Get("https://httpbin.org/get")
 	if err != nil {
 		panic(err)
 	}
@@ -35,26 +35,27 @@ func getEcsMetadata() string {
 	if err != nil {
 		panic(err)
 	}
-	log.Println(body)
-	var metadata taskMetadata
-	if err = json.Unmarshal(body, &metadata); err != nil {
-		panic(err)
-	}
-	//print the value
-	//log.Println(metadata)
-
-	if len(metadata.Containers) > 0 && len(metadata.Containers[0].Networks) > 0 && len(metadata.Containers[0].Networks[0].ipv4Address) > 0 {
-		return metadata.Containers[0].Networks[0].ipv4Address[0]
-	} else {
-		return "NoValue"
-	}
+	bodyString := string(body)
+	log.Println(bodyString)
+	//return bodyString
+	//var metadata taskMetadata
+	//if err = json.Unmarshal(body, &metadata); err != nil {
+	//	panic(err)
+	//}
+	//
+	//if len(metadata.Containers) > 0 && len(metadata.Containers[0].Networks) > 0 && len(metadata.Containers[0].Networks[0].ipv4Address) > 0 {
+	//	return metadata.Containers[0].Networks[0].ipv4Address[0]
+	//} else {
+	//	return "NoValue"
+	//}
 
 }
 
 func getIndexHtml(responseWriter http.ResponseWriter, request *http.Request) {
 	template, err := template.ParseFiles("templates/index.html")
-	localIp := Data{getEcsMetadata()}
-	//localIp := Data{"10.10.0.0/22"}
+	//localIp := Data{getEcsMetadata()}
+	getEcsMetadata()
+	localIp := Data{"10.10.0.0/22"}
 	log.Println(localIp)
 
 	if err != nil {
