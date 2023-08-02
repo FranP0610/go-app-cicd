@@ -25,29 +25,19 @@ type Data struct {
 }
 
 func getEcsMetadata() {
-	response, err := http.Get("http://169.254.170.2/v2/metadata")
-	//response, err := http.Get("https://httpbin.org/get")
+	resp, err := http.Get("http://169.254.170.2/v2/metadata")
 	if err != nil {
 		panic(err)
 	}
-	defer response.Body.Close()
-	body, err := io.ReadAll(response.Body)
+	defer resp.Body.Close()
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		panic(err)
 	}
-	bodyString := string(body)
-	log.Println(bodyString)
-	//return bodyString
-	//var metadata taskMetadata
-	//if err = json.Unmarshal(body, &metadata); err != nil {
-	//	panic(err)
-	//}
-	//
-	//if len(metadata.Containers) > 0 && len(metadata.Containers[0].Networks) > 0 && len(metadata.Containers[0].Networks[0].ipv4Address) > 0 {
-	//	return metadata.Containers[0].Networks[0].ipv4Address[0]
-	//} else {
-	//	return "NoValue"
-	//}
+	log.Printf("%s", body)
+
+	//bodyString := string(body)
+	//log.Println(bodyString)
 
 }
 
