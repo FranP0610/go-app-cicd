@@ -25,7 +25,7 @@ type Data struct {
 	LocalIp string
 }
 
-func getEcsMetadata() {
+func getEcsMetadata() string {
 	resp, err := http.Get("http://169.254.170.2/v2/metadata")
 	if err != nil {
 		panic(err)
@@ -40,7 +40,11 @@ func getEcsMetadata() {
 	log.Printf("%s", body)
 	var metadata taskMetadata
 	json.Unmarshal([]byte(body), &metadata)
-	log.Printf("la ip es %s", metadata.Containers[0].Networks[0].IPv4Addresses[0])
+	if len(metadata.Containers[0].Networks[0].IPv4Addresses[0]) > 0 {
+		return metadata.Containers[0].Networks[0].IPv4Addresses[0]
+	} else {
+		return "No Value"
+	}
 	//bodyString := string(body)
 	//log.Println(bodyString)
 
@@ -48,9 +52,9 @@ func getEcsMetadata() {
 
 func getIndexHtml(responseWriter http.ResponseWriter, request *http.Request) {
 	template, err := template.ParseFiles("templates/index.html")
-	//localIp := Data{getEcsMetadata()}
-	getEcsMetadata()
-	localIp := Data{"10.10.0.0/22"}
+	localIp := Data{getEcsMetadata()}
+	//getEcsMetadata()
+	//localIp := Data{"10.10.0.0/22"}
 	log.Println(localIp)
 
 	if err != nil {
