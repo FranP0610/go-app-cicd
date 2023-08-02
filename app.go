@@ -41,7 +41,7 @@ func getEcsMetadata() string {
 		panic(err)
 	}
 	//print the value
-	log.Println(metadata.Containers[0].Networks[0].ipv4Address[0])
+	log.Println(metadata)
 
 	if len(metadata.Containers) > 0 && len(metadata.Containers[0].Networks) > 0 && len(metadata.Containers[0].Networks[0].ipv4Address) > 0 {
 		return metadata.Containers[0].Networks[0].ipv4Address[0]
