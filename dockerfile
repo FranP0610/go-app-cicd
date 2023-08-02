@@ -1,5 +1,6 @@
 # syntax=docker/dockerfile:1
-FROM golang:1.20-alpine3.18
+FROM public.ecr.aws/docker/library/golang:1.20-alpine3.18
+#FROM golang:1.20-alpine3.18
 
 # Set default destination for all the subsequent commands
 WORKDIR /app
@@ -15,7 +16,7 @@ COPY . ./
 # located in the root of the filesystem of the image
 RUN CGO_ENABLED=0 GOOS=linux go build -o /webapp
 
-EXPOSE 8080
+EXPOSE 8000
 
 # Run
 CMD ["/webapp"]
