@@ -32,16 +32,16 @@ func getEcsMetadata() string {
 	}
 	defer response.Body.Close()
 	body, err := io.ReadAll(response.Body)
-
 	if err != nil {
 		panic(err)
 	}
+	log.Println(body)
 	var metadata taskMetadata
 	if err = json.Unmarshal(body, &metadata); err != nil {
 		panic(err)
 	}
 	//print the value
-	log.Println(metadata)
+	//log.Println(metadata)
 
 	if len(metadata.Containers) > 0 && len(metadata.Containers[0].Networks) > 0 && len(metadata.Containers[0].Networks[0].ipv4Address) > 0 {
 		return metadata.Containers[0].Networks[0].ipv4Address[0]
