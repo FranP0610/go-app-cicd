@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"html/template"
 	"io"
 	"log"
@@ -17,7 +18,7 @@ type Container struct {
 }
 
 type Network struct {
-	ipv4Address []string
+	IPv4Addresses []string
 }
 
 type Data struct {
@@ -29,13 +30,17 @@ func getEcsMetadata() {
 	if err != nil {
 		panic(err)
 	}
+	// Close the response body
 	defer resp.Body.Close()
+	// Read all the contents of the Reader - Buffer to read data
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		panic(err)
 	}
 	log.Printf("%s", body)
-
+	var metadata taskMetadata
+	json.Unmarshal([]byte(body), &metadata)
+	log.Printf("la ip es %s", metadata.Containers[0].Networks[0].IPv4Addresses[0])
 	//bodyString := string(body)
 	//log.Println(bodyString)
 
