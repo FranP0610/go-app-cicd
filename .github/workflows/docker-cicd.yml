@@ -2,7 +2,7 @@ name: 'Deploy To Ecr'
 
 on:
   push:
-    branches: [ 'development' ]
+    branches: [ 'development1' ]
 #    paths:
 #      - '**docker-cicd.yml'
 

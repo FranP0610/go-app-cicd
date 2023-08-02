@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"html/template"
 	"io"
-	"log"
-
 	//"io/ioutil"
 	"net/http"
 )
@@ -37,7 +35,8 @@ func getEcsMetadata() string {
 	if err != nil {
 		panic(err)
 	}
-	log.Printf("%s", body)
+	//log.Printf("%s", body)
+	// Assigning a variable where to store the body response
 	var metadata taskMetadata
 	json.Unmarshal([]byte(body), &metadata)
 	if len(metadata.Containers[0].Networks[0].IPv4Addresses[0]) > 0 {
@@ -45,18 +44,13 @@ func getEcsMetadata() string {
 	} else {
 		return "No Value"
 	}
-	//bodyString := string(body)
-	//log.Println(bodyString)
 
 }
 
 func getIndexHtml(responseWriter http.ResponseWriter, request *http.Request) {
 	template, err := template.ParseFiles("templates/index.html")
 	localIp := Data{getEcsMetadata()}
-	//getEcsMetadata()
-	//localIp := Data{"10.10.0.0/22"}
-	log.Println(localIp)
-
+	// Rendering the html
 	if err != nil {
 		panic(err)
 	} else {
