@@ -16,7 +16,7 @@ COPY . ./
 # located in the root of the filesystem of the image
 RUN CGO_ENABLED=0 GOOS=linux go build -o /webapp
 
-EXPOSE 8000
+EXPOSE 8080
 
 # Run
 CMD ["/webapp"]
