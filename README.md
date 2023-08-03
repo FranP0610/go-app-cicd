@@ -39,7 +39,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Authors
 
-- Your name [@FranP0610](https://github.com/FranP0610)
+-  [@FranP0610](https://github.com/FranP0610)
 
 ## Version History
 
