@@ -6,6 +6,7 @@ This is a simple project written in Go that will get the `ECS Task IP address` a
 <div style="text-align: center;">
 <img src="images/image-v1.png" alt="DevOps Architecture Diagram" width="600px">
 </div>
+
 ## Getting Started
 
 ### Dependencies
