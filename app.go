@@ -19,11 +19,11 @@ type Network struct {
 	IPv4Addresses []string
 }
 
-type Data struct {
-	LocalIp string
-}
+//type Data struct {
+//	LocalIp string
+//}
 
-func getEcsMetadata() string {
+func getEcsLocalAddress() string {
 	resp, err := http.Get("http://169.254.170.2/v2/metadata")
 	if err != nil {
 		panic(err)
@@ -49,12 +49,12 @@ func getEcsMetadata() string {
 
 func getIndexHtml(responseWriter http.ResponseWriter, request *http.Request) {
 	template, err := template.ParseFiles("templates/index.html")
-	localIp := Data{getEcsMetadata()}
+	//localIp := Data{getEcsLocalAddress()}
 	// Rendering the html
 	if err != nil {
 		panic(err)
 	} else {
-		template.Execute(responseWriter, localIp)
+		template.Execute(responseWriter, getEcsLocalAddress())
 	}
 
 }
