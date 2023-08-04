@@ -11,7 +11,7 @@ env:
   BUCKET_PREFIX: "templates/docker/app-go"
   AWS_REGION: "us-east-1" #Change to reflect your Region
   STACK_NAME: "fran-0000-test-all-cf-go-app-v1"
-  IAM_ROLE: "arn:aws:iam::917972781642:role/fran-0000-devops-test-iam-role-github"
+  IAM_ROLE: ""
   ECR_REPOSITORY: "fran-0000-devops-prod-00-ecr-repo-app"   # set this to your Amazon ECR repository name
   ECS_TASK_DEFINITION: "./aws/task-definition.json"
   CONTAINER_NAME: "fran-0000-devops-prod-01-ecs-task-golang"
